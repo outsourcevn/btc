@@ -73,11 +73,11 @@ a:focus {
 img[src="assets/images/blank.gif"] {
   background: url("../images/ajax.gif") no-repeat scroll center center #ffffff;
 }
-@font-face {
+/*@font-face {
   font-family: 'FjallaOneRegular';
   src: url('../fonts/fjalla/fjallaone-regular.eot');
   src: url('../fonts/fjalla/fjallaone-regular.eot') format('embedded-opentype'), url('../fonts/fjalla/fjallaone-regular.woff2') format('woff2'), url('../fonts/fjalla/fjallaone-regular.woff') format('woff'), url('../fonts/fjalla/fjallaone-regular.ttf') format('truetype'), url('../fonts/fjalla/fjallaone-regular.svg#FjallaOneRegular') format('svg');
-}
+}*/
 @font-face {
   font-family: 'BebasNeueBold';
   src: url('../fonts/bebas/bebasneuebold.eot');
@@ -1157,7 +1157,7 @@ a {
 }
 .top-cart-row .dropdown-cart .lnk-cart .items-cart-inner .total-price-basket {
   padding: 13px 15px;
-  font-family: 'FjallaOneRegular';
+  /*font-family: 'FjallaOneRegular';*/
   text-transform: uppercase;
   float: left;
 }
@@ -1199,7 +1199,7 @@ a {
 }
 .top-cart-row .dropdown-cart .dropdown-menu .cart-item.product-summary .name {
   font-size: 13px;
-  font-family: 'FjallaOneRegular';
+  /*font-family: 'FjallaOneRegular';*/
   margin-top: 0px;
 }
 .top-cart-row .dropdown-cart .dropdown-menu .cart-item.product-summary .name a {
@@ -1220,7 +1220,7 @@ a {
 }
 .top-cart-row .dropdown-cart .dropdown-menu .cart-total .text {
   font-size: 13px;
-  font-family: 'FjallaOneRegular';
+  /*font-family: 'FjallaOneRegular';*/
   color: #666666;
   margin-right: 10px;
 }
