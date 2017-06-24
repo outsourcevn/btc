@@ -1,0 +1,333 @@
+﻿@{
+    ViewBag.Title = "Phụ Tùng Hoàng Gia";
+    int countslide = 0;
+}
+<style>
+    #map {
+        float: left;
+        width: 100%;
+        min-height: 600px;
+      }
+</style>
+<link href="/Content/themes/pthg/css/home.css" rel="stylesheet">
+<script>
+    $(document).ready(function () {
+
+        $('#itemslider').carousel({ interval: 3000 });
+
+        $('.carousel-showmanymoveone .item').each(function () {
+            var itemToClone = $(this);
+
+            for (var i = 1; i < 6; i++) {
+                itemToClone = itemToClone.next();
+
+                if (!itemToClone.length) {
+                    itemToClone = $(this).siblings(':first');
+                }
+
+                itemToClone.children(':first-child').clone()
+                .addClass("cloneditem-" + (i))
+                .appendTo($(this));
+            }
+        });
+    });
+
+</script>
+
+<!-- Banner Slider Start -->
+  <div class="cp-banner cp-banner2">
+    <!--Banner Slider Start-->
+    <div id="home-slider2" class="owl-carousel" style="max-height: 840px;">
+      <div class="item">
+        <img src="~/Content/themes/pthg/images/banner/banner2-img-01.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title" >Hoàng Gia <a href="http://phutunghoanggia.vn" target="_blank" style="color:#ffd800;">phutunghoanggia.vn</a></strong>
+            <p style="text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;">Luôn Đoán Trước Nhu Cầu Của Khách Hàng. </p>
+          </div>
+        </div><!--Slider Caption End-->
+      </div>
+      <div class="item">
+        <img src="~/Content/themes/pthg/images/banner/banner2-img-02.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title" style="text-shadow: 12px 12px blue;">Phụ Tùng Hoàng Gia</strong>
+            <p style="text-shadow: 0 0 33px #FF0000, 0 0 35px #0000FF;line-height: 60px;display: block;margin: 0 0 25px;">Tất cả những gì bạn cần chúng tôi đều có!</p>
+          </div>
+        </div><!--Slider Caption End-->
+      </div>
+      @*<div class="item">
+        <img src="/Content/themes/pthg/images/banner/banner2-img-03.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title">Ride A Bike</strong>
+            <p>Cycling is the sport that can easily be picked up as an adult. </p>
+          </div>
+        </div><!--Slider Caption End-->
+
+      </div>
+
+      <div class="item">
+        <img src="/Content/themes/pthg/images/banner/banner2-img-04.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title">Hoàng Gia</strong>
+            <p>Luôn Đoán Trước Nhu Cầu Của Khách Hàng. </p>
+          </div>
+        </div><!--Slider Caption End-->
+
+      </div>*@
+     
+    </div><!--Banner Slider End-->
+
+    <span class="cp-arrow-btn"></span>
+  </div>
+<!-- Banner Slider End -->
+<!--Pop Up Overlay Start-->
+<!--<div id="popup-overlay">
+  <div class="container">
+  <div id="popup" class="cp-popup-holder">
+    <div class="cp-inner">
+      <a href="#" id="popup-close"><i class="fa fa-close"></i></a>
+      <div class="cp-heading-style1_v1">
+        <h2><span>Our </span>Newsletter</h2>
+      </div>
+      <p>Subscribe to the <span class="color">Riders</span> mailing list to receive updates on new arrivals, offers and other discount information.</p>
+      <form method="post">
+        <input type="text" placeholder="Email">
+        <button class="subscribe" type="submit">Subscribe</button>
+        <input type="checkbox" value=""> Don't show it again<br>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>-->
+<!--Pop Up Overlay End-->
+<!-- Main Content Start -->
+<div class="cp-main-content">
+    <!--Services Section Start-->
+    @*<section class="cp-services-section cp-services-section_v2 pd-tb100" style="background-color:#424242;">
+        <div class="container">
+            <div class="cp-heading-style2_v2">
+                <h2>DỊCH VỤ CỦA CHÚNG TÔI </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <!--Services Item Start-->
+                    <div class="cp-services-item">
+                        <span class="fa fa-motorcycle icomoon"> </span>
+                        <h3>PHỤ TÙNG XE MÁY </h3>
+                        <p>Chuyên lốp Honda SH, phụ tùng, phụ kiện Honda, chính hãng </p>
+                        <a href="#" class="readmore">Read More</a>
+                    </div><!--Services Item End-->
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!--Services Item Start-->
+                    <div class="cp-services-item">
+                        <span class="icon-discount-badge icomoon"> </span>
+                        <h3>DỊCH VỤ SỬA CHỮA</h3>
+                        <p>Nâng cấp, chăm sóc, sửa chữa xe máy thân yêu của bạn.</p>
+                        <a href="#" class="readmore">Read More</a>
+                    </div><!--Services Item End-->
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!--Services Item Start-->
+                    <div class="cp-services-item">
+                        <span class="icon-shopping-trolley-full icomoon"> </span>
+                        <h3>PHÂN PHỐI</h3>
+                        <p>Bán buôn, bán lẻ phụ kiện, phụ tùng xe máy</p>
+                        <a href="#" class="readmore">Read More</a>
+                    </div><!--Services Item End-->
+                </div>
+            </div>
+        </div>
+
+    </section><!--Services Section End-->*@
+    @{Html.RenderAction("DanhMucSanPhamPartial");}
+    <!--Product Section Start-->    
+    <!-- Item slider-->
+    <div class="container-fluid" style="background-color: #f7f7f7;padding-top:50px;">
+        <div class="row">
+            <div class="cp-heading-style2_v1">
+                <h3>SẢN PHẨM BÁN CHẠY NHẤT</h3>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="carousel carousel-showmanymoveone slide" id="itemslider">
+                    <div class="carousel-inner">
+                        @foreach (var item in ViewBag.products)
+                        {
+                            var link = "/san-pham/" + tbcng.Helpers.configs.getcatnameurl(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                            var atv = "";
+                            if (countslide == 0) { atv = "active"; }
+                            countslide++;
+                            <div class="item @atv">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="@link"><img src="http://lopnhanh.net/@item.product_photo" class="img-responsive center-block"></a>
+                                    <h4 class="text-center">@item.product_name</h4>
+                                    <h5 class="text-center">@String.Format("{0:n0}", item.product_price_public != null ? item.product_price_public : 0)</h5>
+                                </div>
+                            </div>
+                        }
+                        @*<div class="item active">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="#"><img src="https://s12.postimg.org/655583bx9/item_1_180x200.png" class="img-responsive center-block"></a>
+                                    <h4 class="text-center">MAYORAL SUKNJA</h4>
+                                    <h5 class="text-center">4000,00 RSD</h5>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="#"><img src="https://s12.postimg.org/41uq0fc4d/item_2_180x200.png" class="img-responsive center-block"></a>
+                                    <h4 class="text-center">MAYORAL KOŠULJA</h4>
+                                    <h5 class="text-center">4000,00 RSD</h5>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="#"><img src="https://s12.postimg.org/dawwajl0d/item_3_180x200.png" class="img-responsive center-block"></a>
+                                    <span class="badge">10%</span>
+                                    <h4 class="text-center">PANTALONE TERI 2</h4>
+                                    <h5 class="text-center">4000,00 RSD</h5>
+                                    <h6 class="text-center">5000,00 RSD</h6>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="#"><img src="https://s12.postimg.org/5w7ki5z4t/item_4_180x200.png" class="img-responsive center-block"></a>
+                                    <h4 class="text-center">CVETNA HALJINA</h4>
+                                    <h5 class="text-center">4000,00 RSD</h5>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="#"><img src="https://s12.postimg.org/e2zk9qp7h/item_5_180x200.png" class="img-responsive center-block"></a>
+                                    <h4 class="text-center">MAJICA FOTO</h4>
+                                    <h5 class="text-center">4000,00 RSD</h5>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                    <a href="#"><img src="https://s12.postimg.org/46yha3jfh/item_6_180x200.png" class="img-responsive center-block"></a>
+                                    <h4 class="text-center">MAJICA MAYORAL</h4>
+                                    <h5 class="text-center">4000,00 RSD</h5>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div id="slider-control">
+                        <a class="left carousel-control" href="#itemslider" data-slide="prev"><img src="https://s12.postimg.org/uj3ffq90d/arrow_left.png" alt="Left" class="img-responsive"></a>
+                        <a class="right carousel-control" href="#itemslider" data-slide="next"><img src="https://s12.postimg.org/djuh0gxst/arrow_right.png" alt="Right" class="img-responsive"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Item slider end-->
+    <!--Instagram Section Start-->
+    @*<section class="cp-instagram-section" style="background-color: #91c9da;padding-top:50px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <div class="cp-instagram-text">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                        <div class="cp-bottom">
+                            <span>Ảnh sản phẩm</span>
+                            <h3>Xem Nhiều</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <ul class="cp-instagram-listed">
+                        <li>
+                            <figure class="cp-thumb">
+                                <a href="#"><img src="images/products/flickr-img1.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="cp-thumb">
+                                <a href="#"><img src="images/products/flickr-img2.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="cp-thumb">
+                                <a href="#"><img src="images/products/flickr-img3.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="cp-thumb">
+                                <a href="#"><img src="images/products/flickr-img4.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="cp-thumb">
+                                <a href="#"><img src="images/products/flickr-img5.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="cp-thumb">
+                                <a href="#"><img src="images/products/flickr-img6.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
+                            </figure>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>*@ <!--Instagram Section End-->
+    <!--Our Clients Section Start-->
+    <section class="cp-clients-section pd-tb100">
+        <div class="cp-heading-style2_v1">
+            <h2>ĐỐI TÁC</h2>
+        </div>
+        <div class="container">
+            <!--Client Listed Start-->
+            <ul class="cp-clients-listed">
+                <li><a href="#"><img src="images/products/client-logo1.png" alt="" style="border:1px solid red;width:190px;height:auto;"></a></li>
+                <li><a href="#"><img src="images/products/client-logo2.png" alt="" style="border:1px solid red;width:190px;height:auto;"></a></li>
+                <li><a href="#"><img src="images/products/client-logo3.png" alt="" style="border:1px solid red;width:190px;height:auto;"></a></li>
+                <li><a href="#"><img src="images/products/client-logo4.png" alt="" style="border:1px solid red;width:190px;height:auto;"></a></li>
+                <li><a href="#"><img src="images/products/client-logo5.png" alt="" style="border:1px solid red;width:190px;height:auto;"></a></li>
+            </ul>
+            <!--Client Listed End-->
+        </div>
+    </section><!--Our Clients Section End-->
+    <!--Footer Maps Start-->
+    <section class="cp-footer-map" style="background-color: #f8f7f6;">
+        @*<div id="cp-map_v1"></div>*@
+        <div id="map"></div>
+    </section><!--Footer Maps End-->
+
+</div>
+<!-- Main Content End --> 
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: { lat: 21.008665, lng: 105.8472903 }
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
+            });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+    var locations = [{ lat: 21.008665, lng: 105.8472903 }, { lat: 20.9731359, lng: 105.823845 }]; 
+</script>
+<script src="/Scripts/markerclusterer.js">
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLPSKQ4QV4xGiQjnZDUecx-UEr3D0QePY&libraries=places&region=vn&language=vi&callback=initMap" type="text/javascript"></script>
