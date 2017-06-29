@@ -109,9 +109,10 @@
                                 @Html.LabelFor(model => model.product_new_type, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
                                 <div class="col-md-3">
                                     <select class="form-control" name="product_new_type" id="product_new_type" data-val="true" data-val-required="Chọn kiểu bài viết" aria-required="true" aria-describedby="product_new_type-error" aria-invalid="true">
-                                        <option value="">Chọn kiểu bài viết</option>
+                                        <option value="">Chọn kiểu bài viết sản phẩm</option>
                                         <option value="1">Bài viết thường</option>
                                         <option value="2">Bài viết nổi bật</option>
+                                        <option value="3">Bài viết đặc biệt</option>
                                     </select>
                                     @Html.ValidationMessageFor(model => model.product_new_type, "", new { @class = "text-danger" })
                                 </div>

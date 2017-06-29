@@ -53,7 +53,7 @@ namespace tbcng.Models
         [Display(Name = "Ngôn ngữ")]
         public string lang { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập {0}")]
-        [Display(Name = "Loại tin")]
+        [Display(Name = "Loại sản phẩm")]
         public Nullable<int> product_new_type { get; set; }
         //[Required(ErrorMessage = "Vui lòng nhập {0}")]
         [Display(Name = "Giá sản phẩm")]

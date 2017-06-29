@@ -48,28 +48,34 @@ namespace tbcng.Helpers
             }
             return true;
         }
-        public static string getAllMenu(int? mobile)
+        public static string getAllMenu(int? menu)
         {
             try
             {
+                if (menu == -1) menu = null;
                 string rs = "";
-                if (mobile==0) rs="<ul class=\"dropdown-menu\">";
-                var p = (from q in db.cats where q.cat_parent_id == null select q).OrderBy(o => o.cat_pos).ToList();
+                
+                var p = (from q in db.cats where q.cat_parent_id == menu select q).OrderBy(o => o.cat_pos).ToList();
                 for (int i = 0; i < p.Count; i++)
                 {
-                    if (mobile == 0) { 
-                        rs += "<li >";
-                        rs += getAllChildMenu(p[i].cat_name, p[i].cat_id, 1, mobile);
-                        rs += "</li>";
-                    }
-                    else
-                    {
-                        rs += "<div class=\"col-md-12\">";
-                        rs += getAllChildMenu(p[i].cat_name, p[i].cat_id, 1, mobile);
-                        rs += "</div>";
-                    }
+                    //if (mobile == 0) { 
+                    //    rs += "<li >";
+                    //    rs += getAllChildMenu(p[i].cat_name, p[i].cat_id, 1, mobile);
+                    //    rs += "</li>";
+                    //}
+                    //else
+                    //{
+                        int tempcatid = p[i].cat_id;
+                        var p2 = (from q2 in db.cats where q2.cat_parent_id == tempcatid select q2).OrderBy(o => o.cat_pos).ToList();
+                        rs += "<div class=\"col-xs-12 col-sm-6 col-md-3\"><h2 class=\"title\">" + p[i].cat_name + "</h2><ul class=\"links\">";
+                        for (int ii = 0; ii < p2.Count; ii++)
+                        {
+                            rs += getAllChildMenu(p2[ii].cat_id);
+                        }
+                        rs += "</ul></div>";
+                    //}
                 }
-                if (mobile == 0) rs += "</ul>";
+               
                 return rs;
             }
             catch
@@ -77,54 +83,58 @@ namespace tbcng.Helpers
                 return "";
             }
         }
-        public static string getAllChildMenu(string name, int id, int l, int? mobile)
+        public static string getAllMenuLeft(int? menu)
         {
             try
             {
-                string space="";
-                for (int j = 0; j <= l*4; j++)
+                if (menu == -1) menu = null;
+                string rs = "";
+
+                var p = (from q in db.cats where q.cat_parent_id == menu select q).OrderBy(o => o.cat_pos).ToList();
+                for (int i = 0; i < p.Count; i++)
                 {
-                    space += "&nbsp";
+                    rs += "<li class=\"dropdown menu-item\"><a  class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"/san-pham/" + unicodeToNoMark(p[i].cat_name) + "-" + p[i].cat_id + "/all-0-0-1-1\"><i class=\"icon fa fa-desktop fa-fw\"></i>" + p[i].cat_name + "</a></li>";
+                    
                 }
-                string rs = "";// "<a href=\"#\">" + name + " </a>";
-                string temp="<i class=\"fa fa-angle-down\"></i>";//"class=\"dropdown-submenu\"";
-                string temp2 = "";
-                string display = "display:block;";//float:left;position:relative;
-                //string classcss="";
-                var p2 = (from q2 in db.cats where q2.cat_parent_id == id select q2).OrderBy(o => o.cat_pos).ToList();
-                for (int ii = 0; ii < p2.Count; ii++)
+
+                return rs;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+        public static string getAllMenuV(int? menu)
+        {
+            try
+            {
+                    string rs = "";
+                    var p2 = (from q2 in db.cats where q2.cat_parent_id == menu select q2).OrderBy(o => o.cat_pos).ToList();
+                    
+                    for (int ii = 0; ii < p2.Count; ii++)
+                    {
+                        rs += "<div class=\"col-xs-12 col-sm-6 col-md-3\"><h2 class=\"title\">" + p2[ii].cat_name + "</h2><ul class=\"links\">";
+                        rs += getAllChildMenu(p2[ii].cat_id);
+                        rs += "</ul></div>";
+                    }
+                    
+                    return rs;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+        public static string getAllChildMenu(int id)
+        {
+            try
+            {
+                string rs = "";
+                var p3 = (from q3 in db.cats where q3.cat_parent_id == id select q3).OrderBy(o => o.cat_pos).ToList();
+                for (int ii = 0; ii < p3.Count; ii++)
                 {
-                    temp2 = getAllChildMenu(p2[ii].cat_name, p2[ii].cat_id, l + 1, mobile);
-                    if (l > 1) display = "display:none;";//float:left;position:relative;
-                    //temp = "";
-                    if (temp2 != "")
-                    {
-                        //rs += "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a>";
-                        //rs += "<ul class=\"dropdown-menu\">" + temp2 + "</li></ul>";
-                        //if (mobile == 1) { classcss = ""; }
-                        if (mobile == 0) { 
-                            rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\"  style=\"" + display + "\" onclick=\"viewtree(" + p2[ii].cat_id + ");\"><a class=\"test\" tabindex=\"-1\" style=\"cursor:pointer\">" + space + p2[ii].cat_name + temp + "</a></li>";//<span class=\"caret\"  style='float:right;'></span>
-                        }
-                        else
-                        {
-                            rs += "<div id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\"  style=\"" + display + "\" class=\"col-md-12\" onclick=\"viewtree(" + p2[ii].cat_id + ");\"><a class=\"test\" tabindex=\"-1\" style=\"cursor:pointer\">" + space + p2[ii].cat_name + temp + "</a></div>";
-                        }
-                        rs += temp2;
-                    }
-                    else 
-                    {
-                        //rs += "<li ><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a></li>";
-                        //rs += temp2;
-                        if (mobile == 0)
-                        {
-                            rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + "</a></li>";
-                        }
-                        else
-                        {
-                            rs += "<div id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\" class=\"col-md-12\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + "</a></div>";
-                        }
-                        rs += temp2;
-                    }
+
+                    rs += "<li><a  href=\"/san-pham/" + unicodeToNoMark(p3[ii].cat_name) + "-" + p3[ii].cat_id + "/all-0-0-1-1\">" + p3[ii].cat_name + "</a></li>";
                     
                 }
                 return rs;

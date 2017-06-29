@@ -125,7 +125,7 @@ namespace tbcng.Controllers
                     await db.SaveChangesAsync();
                     TempData["Updated"] = "Cập nhật danh mục thành công";
                 }
-                return RedirectToRoute("AdminEditCat", new { id = model.cat_id });
+                return RedirectToRoute("AdminListCat");
             }
             catch (Exception ex)
             {
