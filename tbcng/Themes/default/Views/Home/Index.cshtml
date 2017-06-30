@@ -19,7 +19,6 @@
             <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
                 <div id="hero">
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-
                         <div class="item" style="background-image: url(/Content/themes/pthg/assets/images/sliders/01.jpg);">
                             <div class="container-fluid">
                                 <div class="caption bg-color vertical-center text-left">
@@ -100,6 +99,8 @@
                         </div><!-- /.row -->
                     </div><!-- /.info-boxes-inner -->
                 </div><!-- /.info-boxes -->
+                @{Html.RenderAction("DanhMucSanPhamPartial");}
+                
             </div>
         </div>
     </div>
