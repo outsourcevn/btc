@@ -17,7 +17,9 @@ namespace tbcng.Controllers
         {
             try
             {
-                ViewBag.products = (from q in db.products select q).OrderByDescending(o => o.loads).ThenByDescending(o => o.product_id).Take(15).ToList();//db.products.OrderByDescending(o => o.loads).ThenByDescending(o=>o.product_id).Take(15);
+                //ViewBag.products = (from q in db.products select q).OrderByDescending(o => o.loads).ThenByDescending(o => o.product_id).Take(15).ToList();//db.products.OrderByDescending(o => o.loads).ThenByDescending(o=>o.product_id).Take(15);
+                ViewBag.special = (from q in db.products where q.status==true && q.product_new_type == 3 select q).OrderByDescending(o => o.product_id).Take(5).ToList();
+                ViewBag.feature = (from q in db.products where q.status ==true && q.product_new_type == 2 select q).OrderByDescending(o => o.product_id).Take(6).ToList();
             }
             catch { 
             }
@@ -31,7 +33,7 @@ namespace tbcng.Controllers
         }
         public ActionResult ProductWithCatelog(int? cat_id)
         {
-            var data = db.products.Where(x => x.cat_id == cat_id || x.cat_id_2 == cat_id || x.cat_id_3 == cat_id).OrderByDescending(x=>x.product_id).Take(10).ToList();
+            var data = db.products.Where(x => x.cat_id == cat_id || x.cat_id_2 == cat_id || x.cat_id_3 == cat_id).Where(x=>x.status==true).OrderByDescending(x=>x.product_id).Take(10).ToList();
             return PartialView("_ProductWithCatelog", data);
         }
         public ActionResult About()

@@ -50,7 +50,7 @@ a {
   color: #abd07e;
 }
 .header-style-1 .header-nav {
-  background: #abd07e;
+  background: #232f3e;
 }
 .cnt-home .header-style-1 .header-nav .navbar .navbar-nav > li.active {
   background: #84b943;
@@ -82,7 +82,7 @@ a {
   color: #abd07e;
 }
 .info-box .info-box-heading.green {
-  color: #abd07e;
+  color: #555;
 }
 .scroll-tabs .nav-tab-line li a:hover,
 .scroll-tabs .nav-tab-line li a:focus {
@@ -120,16 +120,16 @@ a {
 .footer .links-social .social-icons a:hover,
 .footer .links-social .social-icons a:focus,
 .footer .links-social .social-icons a.active {
-  background: #abd07e;
+  background: #ed6a37;
 }
 .latest-tweet .re-twitter .comment a {
-  color: #abd07e;
+  color: #555;
 }
 .latest-tweet .re-twitter .comment .icon .fa-stack-2x {
-  color: #abd07e;
+  color: #ed6a37;
 }
 .footer .contact-information .media .icon .fa-stack-2x {
-  color: #abd07e;
+  color: #ed6a37;
 }
 .footer .contact-information .media .media-body a:hover,
 .footer .contact-information .media .media-body a:focus {

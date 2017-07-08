@@ -4,8 +4,9 @@
     ViewBag.Title = Model.product_name;
     Layout = "~/Themes/default/Views/Shared/_Layout.cshtml";
     var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(Model.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(Model.product_name) + "-" + Model.product_id;
-    ViewBag.url = "http://lopnhanh.net/" + link;
+    ViewBag.url = "http://bataca.vn/" + link;
 }
+
 <!---PrettyPhoto CSS-->
 <link href="~/Content/themes/pthg/css/prettyPhoto.css" rel="stylesheet">
 <!---Owl Carousel CSS-->
@@ -27,157 +28,176 @@
 }
 <div id="fb-root"></div>
 <script>
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=234024337101252";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="cp-inner-banner2" style="height:50px;">
-    <div class="container2">
-        <div class="cp-inner-banner-outer2" style="color:black;">
-            <h2 style="color:black;">@Model.product_name</h2>
-            <!--Breadcrumb Start-->
-            <ul class="breadcrumb2">
-                <li><a href="#">Trang Sản Phẩm</a></li>
-                <li class="active">Chi Tiết</li>
-            </ul><!--Breadcrumb End-->
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=1970171883218554";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">                
+                <li class='active' style="min-width: 200px;max-width:500px;">Home/&nbsp;@ViewBag.cat/&nbsp;@Model.product_name</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+<div class="body-content outer-top-xs">
+    <div class='container'>
+        <div class='row single-product outer-bottom-sm '>
+            <div class='col-md-3 sidebar'>
+                <div class="sidebar-module-container">
+                    <!-- ==============================================CATEGORY============================================== -->
+                    <div class="sidebar-widget outer-bottom-xs wow fadeInUp">
+                        <h3 class="section-title">Danh Mục</h3>
+                        <div class="sidebar-widget-body m-t-10">
+		                    <div class="accordion">
+                                @Html.Raw(@tbcng.Helpers.configs.getAllMenu2(44))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-9'>
+                <div class="row  wow fadeInUp">
+                    <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
+                        <div class="product-item-holder size-big single-product-gallery small-gallery">
+                            <div id="owl-single-product">
+                                <div class="single-product-gallery-item" id="slide1">
+                                    <a data-lightbox="image-1" data-title="Gallery" href="@Model.product_photo">
+                                        <img class="img-responsive" alt="" src="@Model.product_photo" data-echo="@Model.product_photo" style="width:370px;height:450px;border:1px solid #e3e3e3;" />
+                                    </a>
+                                </div><!-- /.single-product-gallery-item -->
+                                
+                            </div><!-- /.single-product-slider -->
+
+                            <div class="single-product-gallery-thumbs gallery-thumbs">
+                                <div id="owl-single-product-thumbnails">
+                                    @if (ViewBag.photos != null) {
+                                        foreach (var item in ViewBag.photos) { 
+                                        <div class="item">
+                                            <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide1">
+                                                <img class="img-responsive" width="85" alt="" src="@item.img_url" data-echo="@item.img_url" style="width:85px;height:100px;border:1px solid #e3e3e3;" />
+                                            </a>
+                                        </div>
+                                        }
+                                    }
+                                    
+                                </div><!-- /#owl-single-product-thumbnails -->
+
+                            </div><!-- /.gallery-thumbs -->
+                        </div><!-- /.single-product-gallery -->
+                    </div><!-- /.gallery-holder -->
+                    <div class='col-sm-6 col-md-7 product-info-block'>
+                        <div class="product-info">
+                            <h1 class="name">@Model.product_name</h1>                            
+                            <div class="description-container m-t-20">
+                                @Model.product_des
+                            </div><!-- /.description-container -->
+                            <div class="price-container info-container m-t-20">
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="price-box">
+                                            <span class="price">@String.Format("{0:n0}", Model.product_price_public != null ? Model.product_price_public : 0) đồng</span>
+                                            @*<span class="price-strike">$900.00</span>*@
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-6">
+                                        <div class="favorite-button m-t-10">
+                                            <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
+                                                <i class="fa fa-retweet"></i>
+                                            </a>
+                                            <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
+                                                <i class="fa fa-envelope"></i>
+                                            </a>
+                                        </div>
+                                    </div>*@
+                                </div><!-- /.row -->
+                            </div><!-- /.price-container -->
+                            <div class="quantity-container info-container">
+                                <div class="row">
+                                    @*<div class="col-sm-2">
+                                        <span class="label">Qty :</span>
+                                    </div>*@
+                                    <div class="col-sm-2">
+                                        <div class="cart-quantity">
+                                            <div class="quant-input">
+                                                <div class="arrows">
+                                                    <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+                                                    <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+                                                </div>
+                                                <input type="text" value="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <a onclick="addToCart(@Model.product_id);"  class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> Thêm Vào Giỏ Hàng</a>
+                                    </div>
+
+                                </div><!-- /.row -->
+                            </div><!-- /.quantity-container -->
+                            <div class="product-social-link m-t-20 text-right">
+                                @*<span class="social-label">Share :</span>*@
+                                <div class="social-icons">
+                                    @*<ul class="list-inline">
+                                        <li><a class="fa fa-facebook" href="http://facebook.com/transvelo"></a></li>
+                                        <li><a class="fa fa-twitter" href="#"></a></li>
+                                        <li><a class="fa fa-linkedin" href="#"></a></li>
+                                        <li><a class="fa fa-rss" href="#"></a></li>
+                                        <li><a class="fa fa-pinterest" href="#"></a></li>
+                                    </ul>*@<!-- /.social-icons -->
+                                    <iframe src="https://www.facebook.com/plugins/like.php?href=@ViewBag.url&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=1970171883218554" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+                                </div>
+                            </div>
+
+
+                        </div><!-- /.product-info -->
+                    </div><!-- /.col-sm-7 -->
+                </div><!-- /.row -->
+
+                <div class="product-tabs inner-bottom-xs  wow fadeInUp">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
+                                <li class="active"><a data-toggle="tab" href="#description">Chi Tiết</a></li>
+                                <li><a data-toggle="tab" href="#review">Bình luận</a></li>
+                                @*<li><a data-toggle="tab" href="#tags">TAGS</a></li>*@
+                            </ul><!-- /.nav-tabs #product-tabs -->
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="tab-content">
+                                <div id="description" class="tab-pane in active">
+                                    <div class="product-tab">
+                                        <p class="text">@Html.Raw(Model.product_content)</p>
+                                    </div>
+                                </div><!-- /.tab-pane -->
+                                <div id="review" class="tab-pane">
+                                    <div class="product-tab">
+                                        <div class="fb-comments" data-href="@ViewBag.url" data-numposts="5"></div>
+                                    </div><!-- /.product-tab -->
+                                </div><!-- /.tab-pane -->
+                            </div><!-- /.tab-content -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.product-tabs -->
+                <!-- ============================================== UPSELL PRODUCTS ============================================== -->
+                <section class="section featured-product wow fadeInUp">
+                    <h3 class="section-title">Sản phẩm liên quan</h3>
+                    <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
+                        @{Html.RenderAction("LoadRelateProduct", "Products", new { cat_id = @Model.cat_id, product_id = @Model.product_id });}
+
+                    </div><!-- /.home-owl-carousel -->
+                </section><!-- /.section -->
+                <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
+
+            </div><!-- /.col -->
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
-<!-- Main Content Start -->
-<div class="cp-main-content" style="background:#ffffff;">
-
-    <!--Product Section Start-->
-    <section class="cp-product-section_v2 pd-tb100" style="background:#ffffff;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!--Product Detail Info Start-->
-                    <div class="cp-pro-detail-info">
-                        <div class="row">
-                            <div class="col-md-7 col-sm-12">
-                                @{Html.RenderAction("LoadPhotoProduct2", "Products", new { id = @Model.product_id });}
-                            </div>
-                            <div class="col-md-5 col-sm-12">
-                                <div class="cp-text">
-                                    <div class="cp-top">
-                                        <h3>@Model.product_name</h3>
-                                        <span class="cp-rating">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        </span>
-                                        <span class="total">Mã sản phẩm # @Model.product_id</span>
-                                    </div>
-                                    <p class="first">@Model.product_des</p>
-                                    @*<p>Etiam dictum. Nunc enim. Sed massa tellus, aliquam rhoncus, venenatis quis, suscipit ac, libero. Praesent odio tellus, posuere sed, dictum sed, fermentum at, orci.</p>*@
-                                    @*<ul class="items-list">
-                                            <li>Dài @Model.l (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                            <li>Rộng @Model.w (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                            <li>Cao @Model.h (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                            <li>Nặng @Model.g (g)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                        </ul>*@
-                                    <strong class="price">@String.Format("{0:n0}", @Model.product_price_public) đồng</strong>
-                                    <ul class="categories-list">
-                                        <li>Danh Mục : <span>@ViewBag.cat</span></li>
-                                        <li>
-                                            Chia sẻ link :
-                                            <span class="cp-social-links">
-                                                @*<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>*@
-                                                <iframe src="https://www.facebook.com/plugins/like.php?href=@ViewBag.url&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=234024337101252" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <a style="cursor:pointer" class="cp-btn-style1" onclick="addToCart(@Model.product_id);">Thêm vào giỏ hàng</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--Product Detail Info End-->
-                    <!--Product Tab Box Start-->
-                    <div class="cp-tab-box cp-tab-box2">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li><a href="#cp_tab1" role="tab" data-toggle="tab">Thông tin sản phẩm</a></li>
-                            @*<li><a href="#cp_tab2" role="tab" data-toggle="tab">Events Performer</a></li>
-                                <li class="active"><a href="#cp_tab3" role="tab" data-toggle="tab">Thông tin thêm</a></li>*@
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active fade in" id="cp_tab1">
-                                <div class="cp-tab-info-box">
-                                    @Html.Raw(@Model.product_content)
-                                </div>
-                            </div>
-                            <div class="fb-comments" data-href="@ViewBag.url" data-numposts="5"></div>
-                            @*<div class="tab-pane fade" id="cp_tab2">
-                                    <div class="cp-tab-info-box">
-                                        <div class="cp-tab-text">
-                                            <p class="first">@Model.product_content</p>
-                                        </div>
-                                    </div>
-
-                                </div>*@
-                            @*<div class="class=" tab-pane active fade in"" id="cp_tab3">
-                                    <div class="cp-tab-info-box">
-                                        <div class="cp-tab-text">
-                                            <p class="first">@Html.Raw(@Model.product_content)</p>
-                                        </div>
-                                    </div>
-                                </div>*@
-                        </div>
-                    </div><!--Product Tab Box End-->
-                    @*<!--Form Box Start-->
-                        <div class="cp-form-box">
-                            <h3>Leaves Review</h3>
-                            <form action="form3.php" method="post">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-4">
-                                        <div class="inner-holder">
-                                            <input type="text" placeholder="Your Name" name="name2" required pattern="[a-zA-Z ]+">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <div class="inner-holder">
-                                            <input type="text" placeholder="Your Email" name="email2" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <div class="inner-holder">
-                                            <input type="text" placeholder="Subject" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="inner-holder">
-                                            <textarea placeholder="Comments" name="comment2" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="inner-holder cp-btn-holder">
-                                            <button type="submit" class="cp-btn-style1 btn-submit" value="Submit" name="submit2">Submit Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div><!--Form Box End-->*@
-                    <!--Product Slider Outer Start-->
-                    <div class="cp-product-slider-outer">
-                        <h3>Sản Phẩm Liên Quan</h3>
-                        @{Html.RenderAction("LoadRelateProduct", "Products", new { cat_id = @Model.cat_id, product_id = @Model.product_id });}
-                    </div>
-                    <!--Product Slider Outer End-->
-
-                </div>
-            </div>
-        </div>
-
-    </section><!--Product Section End-->
-
-</div>
-<!-- Main Content End --> 
-
-<script src="~/Content/themes/pthg/js/jquery.prettyPhoto.js"></script>
-<!---Countdown.js-->
-<script src="~/Content/themes/pthg/js/jquery.countdown.min.js"></script>

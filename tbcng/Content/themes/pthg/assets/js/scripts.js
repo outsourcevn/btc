@@ -413,3 +413,77 @@ $('#transitionType li a').click(function () {
 
 
 })(jQuery);
+function formatDollar(num) {
+    var p = parseFloat(num).toFixed(2).split(".");
+    return p[0].split("").reverse().reduce(function (acc, num, i, orig) {
+        return num == "-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+    }, "");// + "." + p[1]
+}
+//Huynv add, thêm vào giỏ hàng
+function addToCart(product_id) {
+    $.ajax({
+        url: '/Products/addToCart',
+        type: 'POST',
+        datatype: 'text',
+        data: "product_id=" + product_id,
+        success: function (data) {
+            if (data != "0") {
+                //alert(data);
+                var obj = JSON.parse(data);
+                //alert(formatDollar(obj.product_price));
+                //add item
+                var item = "";
+                item += "<div class=\"cart-item product-summary\" id=\"cartitem_" + obj.id + "\">";
+                item+=" <div class=\"row\">";
+                item+=                        "<div class=\"col-xs-4\">";
+                item+=                           "<div class=\"image\">";
+                item+=                                "<a ><img src=\""+ obj.product_photos+"\" alt=\"\" style=\"width:47px;height:61px;border:1px solid #e3e3e3;\"></a>";
+                item+=                            "</div>";
+                item+=                        "</div>";
+                item+=                        "<div class=\"col-xs-7\">";             
+                item+=                            "<h3 class=\"name\"><a >"+obj.product_name+"</a></h3>";
+                item+="<div class=\"price\">"+formatDollar(obj.product_price)+"</div>";
+                item+=                        "</div>";
+                item+=                        "<div class=\"col-xs-1 action\">";
+                item+=                            "<a onclick=\"removeCartItem("+obj.id+");\" style=\"cursor:pointer;\"><i class=\"fa fa-trash\"></i></a>";
+                item+=                        "</div>";
+                item+=" </div>";
+                item += "</div>";
+                //alert(item);
+                $("#cart-listed").append(item);                
+                if (document.getElementById("totalcartitems")) {
+                    var total = parseInt($("#totalcartitems").html());
+                    total++;
+                    $("#totalcartitems").html(total);
+                } else {
+                    $("#totalcartitems").html("1");
+                }
+                if (document.getElementById("chkshowpopupdv").checked == false) $("#showpopupdv").show();
+
+            };
+        },
+        error: function (jqXHR, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+//Huynv add, bỏ vào giỏ hàng
+function removeCartItem(id) {
+    $.ajax({
+        url: '/Products/removeCartItem',
+        type: 'POST',
+        datatype: 'text',
+        data: "id=" + id,
+        success: function (data) {
+            if (data == "1") {
+                $("#cartitem_" + id).hide();
+                var total = parseInt($("#totalcartitems").html());
+                total--;
+                if (total >= 0) $("#totalcartitems").html(total);
+            };
+        },
+        error: function (jqXHR, exception) {
+            alert(exception.toString());
+        }
+    });
+}

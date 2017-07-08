@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Danh sách sản phẩm";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string type = "sp thường";
 }
 
 @section Styles {
@@ -89,6 +90,9 @@
                                 {
                                     foreach (var item in Model)
                                     {
+                                        if (item.product_new_type == 1) { type = "sp thường"; }
+                                        if (item.product_new_type == 2) { type="sp nổi bật";}
+                                        if (item.product_new_type == 3) { type = "sp đặc biệt"; }
                                         <tr class='@if (item.status == false) {<text>text-line-through</text>}'>
                                             <td>@item.product_id</td>
                                             <td><img src="@item.product_photo" class="img-responsive center-block" style="width:50px;height:50px;"></td>                                            
@@ -105,6 +109,7 @@
                                                 {
                                                     <span>Đã đăng</span>
                                                 }
+                                                <br />@type
                                             </td>
                                             <td>
                                                 <span class="btn btn-primary" onclick="gotoUrl('@Url.RouteUrl("AdminEditProduct", new { id = item.product_id })')"><i class="fa fa-edit"></i> Sửa</span>

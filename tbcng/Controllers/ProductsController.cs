@@ -159,6 +159,7 @@ namespace tbcng.Controllers
                 //_new.product_type = model.product_type ?? null;
                 _new.product_new_type = model.product_new_type ?? null;
                 _new.status = model.status;
+                _new.loads = 1;
                 _new.updated_date = DateTime.Now;
                 _new.product_des = model.product_des ?? null;
                 _new.g=model.g;
@@ -337,6 +338,7 @@ namespace tbcng.Controllers
             }
             db.Database.ExecuteSqlCommand("update products set loads=loads+1 where product_id="+id);
             ViewBag.cat = db.cats.Find(_model.cat_id).cat_name;
+            ViewBag.photos = db.product_img.Where(o => o.product_id == id).ToList();
             return View(_model);
         }
         public ActionResult Delete(long? id)
@@ -506,7 +508,7 @@ namespace tbcng.Controllers
                         var path = string.Format("{0}\\{1}", pathString, _fileName);
                         System.Drawing.Image bm = System.Drawing.Image.FromStream(file.InputStream);
                         // Thay đổi kích thước ảnh
-                        bm = ResizeBitmap((Bitmap)bm, 400, 310); /// new width, height
+                        //bm = ResizeBitmap((Bitmap)bm, 400, 310); /// new width, height
                         // Giảm dung lượng ảnh trước khi lưu
                         //ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
                         //ImageCodecInfo ici = null;
@@ -661,7 +663,7 @@ namespace tbcng.Controllers
                 po.status = 0;
                 db.product_order.Add(po);
                 db.SaveChanges();
-                string rs = "{\"product_photos\":\"" + pr.product_photo + "\", \"product_name\":\"" + pr.product_name + "\", \"quantity\":\"" + 1 + "\", \"product_price\":\"" + pr.product_price_public + "\"}";
+                string rs = "{\"product_photos\":\"" + pr.product_photo + "\", \"product_name\":\"" + pr.product_name + "\", \"quantity\":\"" + 1 + "\", \"product_price\":\"" + pr.product_price_public + "\", \"id\":\"" + po.id + "\"}";
                 return rs;//JsonConvert.SerializeObject(rs);
             }
             catch
@@ -1030,7 +1032,7 @@ namespace tbcng.Controllers
                          po.status = 1;
                          db.product_order.Add(po);
                          db.SaveChanges();
-                         result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://lopnhanh.net/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: left; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
+                         result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://bataca.vn/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: left; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
                      }
                      result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số Lượng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + total_quantity + "</b></td></tr>";
                      result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí Ship:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", ship_fee) + "</b></td></tr>";
@@ -1109,7 +1111,7 @@ namespace tbcng.Controllers
                         //po.status = 1;
                         //db.product_order.Add(po);
                         //db.SaveChanges();
-                        result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://lopnhanh.net/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: left; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
+                        result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://bataca.vn/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: left; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
                     }
                     result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số Lượng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + total_quantity + "</b></td></tr>";
                     result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí Ship:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", ship_fee) + "</b></td></tr>";

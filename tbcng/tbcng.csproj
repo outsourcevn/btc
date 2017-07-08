@@ -1165,6 +1165,7 @@
     <Content Include="Content\themes\pthg\assets\less\wide-banners.less" />
     <Content Include="Content\themes\pthg\layouts\boxed.php" />
     <Content Include="Content\themes\pthg\layouts\fluid.php" />
+    <None Include="Properties\PublishProfiles\Bataca.pubxml" />
     <None Include="Properties\PublishProfiles\pubweb.pubxml" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />

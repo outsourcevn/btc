@@ -93,8 +93,8 @@ namespace tbcng.Helpers
                 var p = (from q in db.cats where q.cat_parent_id == menu select q).OrderBy(o => o.cat_pos).ToList();
                 for (int i = 0; i < p.Count; i++)
                 {
-                    rs += "<li class=\"dropdown menu-item\"><a  class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"/san-pham/" + unicodeToNoMark(p[i].cat_name) + "-" + p[i].cat_id + "/all-0-0-1-1\"><i class=\"icon fa fa-desktop fa-fw\"></i>" + p[i].cat_name + "</a></li>";
-                    
+                    rs += "<li class=\"dropdown menu-item\"><a   href=\"/san-pham/" + unicodeToNoMark(p[i].cat_name) + "-" + p[i].cat_id + "/all-0-0-1-1\"><i class=\"icon fa fa-desktop fa-fw\"></i>" + p[i].cat_name + "</a></li>";
+                    //class=\"dropdown-toggle\" data-toggle=\"dropdown\"
                 }
 
                 return rs;
@@ -144,17 +144,22 @@ namespace tbcng.Helpers
                 return "";
             }
         }
-        public static string getAllMenu2()
+        public static string getAllMenu2(int id)
         {
             try
             {
                 string rs = "";
-                var p = (from q in db.cats where q.cat_parent_id == null select q).OrderBy(o => o.cat_pos).ToList();
+                var p = (from q in db.cats where q.cat_parent_id == id select q).OrderBy(o => o.cat_pos).ToList();
                 for (int i = 0; i < p.Count; i++)
                 {
-                    //rs += "<li >";
+                    rs += "<div class=\"accordion-group\">";
+                    rs += "<div class=\"accordion-heading\">";
+                    rs += " <a href=\"#" + unicodeToNoMark(p[i].cat_name) + "\" data-toggle=\"collapse\" class=\"accordion-toggle collapsed\">";
+                    rs += p[i].cat_name;
+                    rs += " </a>";
+                    rs += "</div>";
                     rs += getAllChildMenu2(p[i].cat_name, p[i].cat_id, 1);
-                    //rs += "</li>";
+                    rs += "</div>";
                 }
                 
                 return rs;
@@ -168,35 +173,17 @@ namespace tbcng.Helpers
         {
             try
             {
-                string space = "";
-                for (int j = 0; j <= l * 4; j++)
+                string rs = "<div class=\"accordion-body collapse\" id=\"" + unicodeToNoMark(name) + "\" style=\"height: 0px;\">";
+	            rs +="<div class=\"accordion-inner\">";
+	            rs +=" <ul>";
+                var p3 = (from q3 in db.cats where q3.cat_parent_id == id select q3).OrderBy(o => o.cat_pos).ToList();
+                for (int ii = 0; ii < p3.Count; ii++)
                 {
-                    space += "&nbsp";
-                }
-                string rs = "";// "<a href=\"#\">" + name + " </a>";
-                string temp = "";// "<i class=\"fa fa-angle-down\"></i>";//"class=\"dropdown-submenu\"";
-                string temp2 = "";
-                string display = "display:block;";
-                var p2 = (from q2 in db.cats where q2.cat_parent_id == id select q2).OrderBy(o => o.cat_pos).ToList();
-                for (int ii = 0; ii < p2.Count; ii++)
-                {
-                    temp2 = getAllChildMenu2(p2[ii].cat_name, p2[ii].cat_id, l + 1);
-                    //if (l > 1) display = "display:none;";
-                    if (temp2 != "")
-                    {
 
-                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\"  style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + temp + "</a><span class=\"caret\" onclick=\"viewtree2(" + p2[ii].cat_id + ");\"></span></li>";
-                        rs += temp2;
-                    }
-                    else
-                    {
-                        //rs += "<li ><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a></li>";
-                        //rs += temp2;
-                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + "</a></li>";
-                        rs += temp2;
-                    }
+                    rs += "<li><a  href=\"/san-pham/" + unicodeToNoMark(p3[ii].cat_name) + "-" + p3[ii].cat_id + "/all-0-0-1-1\">" + p3[ii].cat_name + "</a></li>";
 
                 }
+                rs += "</ul></div></div>";
                 return rs;
             }
             catch
